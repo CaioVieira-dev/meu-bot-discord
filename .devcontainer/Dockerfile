@@ -63,7 +63,7 @@ RUN echo '\n\nexport NVM_DIR="$HOME/.nvm"' >> /root/.zshrc \
     && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.zshrc
 
 
-WORKDIR /app
+WORKDIR /
 
 # Definir o terminal padrão para Zsh
 CMD ["zsh"]
