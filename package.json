@@ -1,0 +1,14 @@
+{
+  "name": "@caiovieira-dev/meu-bot-discord",
+  "version": "0.0.1",
+  "author": "Caio Vieira caiocesarav0208@gmail.com",
+  "scripts": {
+    "bot:build": "pnpm --filter bot build",
+    "bot:start": "pnpm --filter bot start",
+    "bot:dev": "pnpm --filter bot dev",
+    "bot:lint": "pnpm --filter bot lint"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}

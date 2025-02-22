@@ -1,0 +1,40 @@
+{
+    "name": "devcontainer - Meu bot discord",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "forwardPorts": [3000, 5432],
+    "shutdownAction": "stopCompose",
+    "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
+    "portsAttributes": {
+        "3000": {
+          "label": "Devcontainer",
+          "onAutoForward": "notify",
+          "protocol": "http"
+        },
+        "5432": {
+          "label": "PostgreSQL",
+          "onAutoForward": "notify",
+          "protocol": "http"
+        }
+      },
+      "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+      },
+    "customizations":{
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/zsh"
+            },
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "YoavBls.pretty-ts-errors",
+                "stivo.tailwind-fold",
+                "bradlc.vscode-tailwindcss",
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-docker",
+                "vivaxy.vscode-conventional-commits"
+            ]
+        } 
+   }
+}
+  
