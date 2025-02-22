@@ -2,7 +2,6 @@
     "name": "devcontainer - Meu bot discord",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "app",
-    "workspaceFolder": "/app",
     "forwardPorts": [3000, 5432],
     "shutdownAction": "stopCompose",
     "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
