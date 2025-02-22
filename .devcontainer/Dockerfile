@@ -17,8 +17,22 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     locales \
     netcat-openbsd \
+    build-essential \
+    libssl-dev \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i pt_BR -c -f UTF-8 -A /usr/share/locale/locale.alias pt_BR.UTF-8
+
+# Instalar NVM
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION lts/*
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+# Adicionar nvm, node e npm ao PATH
+ENV PATH $NVM_DIR/versions/node/v$(nvm current)/bin:$PATH
 
 # Instalar Node.js (necessário para TypeScript e pnpm)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
@@ -42,6 +56,11 @@ RUN chsh -s $(which zsh)
 
 RUN SNIPPET="\n\nexport PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.zsh_history" \
     && echo "$SNIPPET" >> "/root/.zshrc"
+
+# Adicionar NVM ao .zshrc
+RUN echo '\n\nexport NVM_DIR="$HOME/.nvm"' >> /root/.zshrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /root/.zshrc \
+    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.zshrc
 
 
 WORKDIR /app
